@@ -1,0 +1,206 @@
+{
+  "name": "Google Sheets To Gmail",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Manual Trigger \nExecutes When i clicks the Trigger ",
+        "height": 96,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -432,
+        112
+      ],
+      "typeVersion": 1,
+      "id": "9b22e7dd-7eb9-468f-bb15-af30092e520a",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Major Node : Google Sheets Connection With OAuth Credentials in Google Cloud\n\nAdded Column Fields To Insert or Append New Node ",
+        "width": 416
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "597a0d79-2e1f-4a02-a539-7bd3f675ed11",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Output Node Gmail Node\n\nThe Appended Data Will Be Send Via Gmail With Pre Formatted Input Text\n",
+        "width": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        352,
+        -96
+      ],
+      "typeVersion": 1,
+      "id": "355ef0cc-bd0b-4ea5-97e0-c759f80203a0",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1-9dQji4w5lV-o1pt7Us8PSaxgb10mlvNK4jQA0px_CU",
+          "mode": "list",
+          "cachedResultName": "Contacts",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-9dQji4w5lV-o1pt7Us8PSaxgb10mlvNK4jQA0px_CU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1-9dQji4w5lV-o1pt7Us8PSaxgb10mlvNK4jQA0px_CU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "Jagada",
+            "Email": "sudheergaming93@outlook.com",
+            "Address": "Srikakulam",
+            "Role ": "HR "
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Role ",
+              "displayName": "Role ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        144,
+        16
+      ],
+      "id": "326ba852-50bf-46de-aa91-b2c34a3478e1",
+      "name": "Data Appending Node",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hWoeSYkbzBCSRj05",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        112
+      ],
+      "id": "ead16733-e55a-4716-9f7d-ca9acc11e419",
+      "name": "Manual Trigger"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=Hello  {{ $json.Name }} Welcome to N8N Automations By Team Sudheer",
+        "emailType": "text",
+        "message": "=You Are  {{ $json['Role '] }} Thanks for the contribution in the Company , Happy Gaming ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        464,
+        160
+      ],
+      "id": "4afa3e94-efb5-49f5-9201-5d6f84a55849",
+      "name": "Gmail Node",
+      "webhookId": "3e42682d-65c3-4b47-a2ba-72ed7ce3a003",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Es1VX6rIPjGyf9Gg",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Data Appending Node": {
+      "main": [
+        [
+          {
+            "node": "Gmail Node",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Data Appending Node",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b7c194b0-8c80-4e9c-8a9f-48f8b4dcd04e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "876cfb335021631f9b16f438cd1b0c790a3b043b502382b35681284bea3a4340"
+  },
+  "id": "LnSCdSSzb6c3wZAw",
+  "tags": []
+}
