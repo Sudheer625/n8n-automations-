@@ -1,0 +1,135 @@
+{
+  "name": "HTTP Request",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b0edd214-0d43-404d-813a-3eaf791b4821",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://api.weatherapi.com/v1/current.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "key",
+              "value": "c68fb57a332c43d6aa021041250612"
+            },
+            {
+              "name": "q",
+              "value": "Sydney"
+            }
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "5b34d751-e87a-47e3-83bb-70686874f6c0",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "32744844-4f25-4beb-910a-8936716c39f5",
+              "name": "temperature ",
+              "value": "={{ $json.current.temp_c }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "2edfc931-888b-4ef2-a50a-228e54ee2555",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "content": "## A API Key and Values are set for the Request \nTypes of Requests \nPOST : to insert\nGET : to retrieve \nPUT : to change\nDELETE : to remove",
+        "height": 176,
+        "width": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -16,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "2957ae2d-cd15-41e9-8e76-ed0d3cfd55b0",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Edit Fields \nThis node will takes one of the value and insert in the variable and gives the output separately "
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        368,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "a8324301-f1ea-40a7-96d6-48c68a83637c",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2edc8de7-4849-4a7d-8efa-a01dfde12104",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "876cfb335021631f9b16f438cd1b0c790a3b043b502382b35681284bea3a4340"
+  },
+  "id": "c5EfkHl4yH0ebSZr",
+  "tags": []
+}
