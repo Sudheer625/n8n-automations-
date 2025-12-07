@@ -1,0 +1,102 @@
+{
+  "name": "JSON",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        -64
+      ],
+      "id": "703ea315-c44f-4137-8acf-39ff88e0a926",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "366c2fe6-e1bb-4490-9533-75a4851778ee",
+              "name": "Full Name",
+              "value": "Singidi Sai Naga Sudheer ",
+              "type": "string"
+            },
+            {
+              "id": "45f501a3-2025-4fb7-adf7-f5b327f77e61",
+              "name": "age",
+              "value": 21,
+              "type": "number"
+            },
+            {
+              "id": "491be00b-f89d-474a-a9d2-078f0aad283c",
+              "name": "Student",
+              "value": "true",
+              "type": "string"
+            },
+            {
+              "id": "370b0dd9-8106-4dc3-b182-86be6b772147",
+              "name": "Skills",
+              "value": "['Python','AI','MERN']",
+              "type": "array"
+            },
+            {
+              "id": "a7ab68fa-00e0-4388-9a49-3dc7807a96a0",
+              "name": "Summary",
+              "value": "{'name':'Sudheer'}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        64,
+        -64
+      ],
+      "id": "d2f5208f-cd8b-4fdd-bf5a-b6af4a15b75c",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "content": "# JSON \n## Java Script Object Notation\nUses to store the data in a key value pair format \nused in API Calls ",
+        "height": 192,
+        "width": 336
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        208,
+        32
+      ],
+      "typeVersion": 1,
+      "id": "46c5c0bb-c722-421b-94cf-c1a44efdb64a",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2f49c634-d899-4e26-8e76-0e3fd3097f82",
+  "meta": {
+    "instanceId": "876cfb335021631f9b16f438cd1b0c790a3b043b502382b35681284bea3a4340"
+  },
+  "id": "U9dzsoX412KYo5Rl",
+  "tags": []
+}
