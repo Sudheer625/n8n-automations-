@@ -1,0 +1,188 @@
+{
+  "name": "Error Handling in N8N",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8169981c-30a3-4df4-bebf-587220d2bdf7",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://www.anime-planet.com/characters/naruto-uzumaki",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "52d52041-2ac7-43e8-a921-0a64fe2af810",
+      "name": "Image Request",
+      "notesInFlow": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "## Adding Error Handling Methods in HTTP Request ",
+        "height": 240,
+        "width": 592,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -144,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "25240a76-36d2-4be7-954e-2fd51aa44caa",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Using AI Agents",
+        "height": 400,
+        "width": 656
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        528,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "2f100b20-8956-42c3-a406-dd5457a31e7e",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "needsFallback": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        768,
+        0
+      ],
+      "id": "b014b5b3-f0b8-4f77-b9df-85f7daf9ecb6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        560,
+        0
+      ],
+      "id": "ce2d8f65-d711-48c0-b074-08b46cec8524",
+      "name": "When chat message received",
+      "webhookId": "04bc617d-c4ad-41d9-a45d-fc40dd65604a"
+    },
+    {
+      "parameters": {
+        "model": "arcee-ai/trinity-mini:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        672,
+        176
+      ],
+      "id": "fddfdfa8-c5cd-4161-a449-aff930a2fa4d",
+      "name": "open router with false creds",
+      "credentials": {
+        "openRouterApi": {
+          "id": "xAJ7X4zo4vhvqy1V",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        832,
+        176
+      ],
+      "id": "13761c3f-0bd9-40cb-977c-4a71c104da28",
+      "name": "Fallback",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "wwqSJZQt7DYLzZI0",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Image Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "open router with false creds": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fallback": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "8b16b0e4-3f57-454f-b56f-7641acf92ac5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "876cfb335021631f9b16f438cd1b0c790a3b043b502382b35681284bea3a4340"
+  },
+  "id": "GNkg027blOhhIbwQ",
+  "tags": []
+}
