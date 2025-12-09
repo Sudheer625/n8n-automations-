@@ -1,0 +1,189 @@
+{
+  "name": "Webhooks",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2feb164a-1538-434b-824d-8f039d7cc053",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -272,
+        -16
+      ],
+      "id": "78a28aea-a349-47e1-976e-a63dec27b73c",
+      "name": "Webhook",
+      "webhookId": "2feb164a-1538-434b-824d-8f039d7cc053"
+    },
+    {
+      "parameters": {
+        "content": "## Basic Web Hooks\nuse to transfer the data using a web call like GET POST PUT etc...",
+        "height": 112,
+        "width": 336
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -544,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "2eef4d00-a23a-4afc-a365-9bef8eb3f52d",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1LWz5Q3ORAfKzme9pCLG0b6hzJj2dRXVePvwoRdivDa4",
+          "mode": "list",
+          "cachedResultName": "New Form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1LWz5Q3ORAfKzme9pCLG0b6hzJj2dRXVePvwoRdivDa4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1LWz5Q3ORAfKzme9pCLG0b6hzJj2dRXVePvwoRdivDa4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "First name": "={{ $json.body.form_response.answers[0].text }}",
+            "Last name": "={{ $json.body.form_response.answers[1].text }}",
+            "Phone number": "={{ $json.body.form_response.answers[2].phone_number }}",
+            "Email": "={{ $json.body.form_response.answers[3].email }}",
+            "Company": "={{ $json.body.form_response.answers[4].text }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "First name",
+              "displayName": "First name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last name",
+              "displayName": "Last name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone number",
+              "displayName": "Phone number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        96,
+        96
+      ],
+      "id": "70e64517-8b64-46bc-bf14-f546bdb5995c",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hWoeSYkbzBCSRj05",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "Thanks For Form Filling",
+        "message": "=Hey {{ $json['First name'] }}{{ $json['Last name'] }} Thanks for the active responses our team will approach you in the onboardings see ya ! ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        368,
+        -48
+      ],
+      "id": "37c3dd15-3adf-4245-b2db-30a278bef8a4",
+      "name": "Send a message",
+      "webhookId": "ef577fbe-8bc8-4509-8150-94b90abb0467",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Es1VX6rIPjGyf9Gg",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "17c9b1d0-1260-4dbc-be37-be934ce1ae9a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "876cfb335021631f9b16f438cd1b0c790a3b043b502382b35681284bea3a4340"
+  },
+  "id": "kRhoQD1YaWruGQsM",
+  "tags": []
+}
